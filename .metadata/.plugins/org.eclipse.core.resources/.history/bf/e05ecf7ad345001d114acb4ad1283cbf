@@ -1,0 +1,9 @@
+package com.ict.mapper;
+
+import java.util.List;
+
+public interface BoardMapper {
+	
+	public List<BoardVO> getList();
+
+}
