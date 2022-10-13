@@ -11,7 +11,10 @@
 	       resultType="com.ict.domain.BoardVO">
 	   
 	        <![CDATA[
-	            SELECT * FROM board_tbl ORDER  BY bno DESC
+	           SELECT * FROM 
+	               (SELECT /*+ INDEX_DESC(board_tbl pk_board) */
+	               rownum rn, board_tbl.* FROM board_tbl WHERE rownum <= #{pageEnd})
+	                   WHERE rn > #{pageStart}
 	        ]]>
 	   </select>
 	   
@@ -42,6 +45,13 @@
                   bno=#{bno}    
                
           </update>
+          
+          
+          <select id="countPageNum" resultType="int">
+              
+                 SELECT COUNT(*) FROM board_tbl
+             
+          </select>
           
           
    </mapper>
