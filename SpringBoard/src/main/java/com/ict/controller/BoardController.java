@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
 import com.ict.domain.PageMaker;
+import com.ict.domain.SearchCriteria;
 import com.ict.mapper.BoardMapper;
+import com.ict.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -25,19 +27,19 @@ public class BoardController {
 	
 	
 	@Autowired
-	private BoardMapper boardMapper;
+	private BoardService service;
 	
 	
 	@GetMapping("/boardList")
-	public String boardList( Criteria cri ,Model model) {
+	public String boardList( SearchCriteria cri ,Model model) {
 		
-		List<BoardVO> boardList = boardMapper.getList( cri);
+		List<BoardVO> boardList = service.getList( cri);
 		model.addAttribute("boardList",boardList);
 		
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		int countPage = boardMapper.countPageNum();
+		int countPage =service.countPageNum();
 		pageMaker.setTotalBoard(countPage);
 		model.addAttribute("pageMaker", pageMaker);
 		
@@ -49,7 +51,7 @@ public class BoardController {
 	@GetMapping("/boardDetail/{bno}")
 	
 	public String boardDetail(@PathVariable long bno, Model model) {
-		BoardVO board  = boardMapper.select(bno);
+		BoardVO board  = service.select(bno);
 		model.addAttribute("board", board);
 		
 		
@@ -66,7 +68,7 @@ public class BoardController {
 	@PostMapping("/boardInsert")
 	public String boardInsert(BoardVO board, Model model) {
 		System.out.print(board);
-		boardMapper.insert(board);
+		service.insert(board);
 		
 		return "redirect:/boardList";
 	}
@@ -74,7 +76,7 @@ public class BoardController {
 	@PostMapping("/boardDelete")
 	public String boardDelete(long bno) {
 		
-		boardMapper.delete(bno);
+		service.delete(bno);
 		
 		return "redirect:/boardList";
 	}
@@ -82,7 +84,7 @@ public class BoardController {
 	
     @PostMapping("/boardUpdateForm")
     public String boardUpdateForm(long bno,Model model) {
-    	BoardVO board = boardMapper.select(bno);
+    	BoardVO board = service.select(bno);
 		model.addAttribute("board", board);
 		
     	
@@ -92,7 +94,7 @@ public class BoardController {
     @PostMapping("/boardUpdate")
     public String boardUpdate(BoardVO board) {
     	
-    	    boardMapper.update(board);
+    	service.update(board);
     	return "redirect:/boardDetail/"+ board.getBno();
     }
 	

@@ -16,7 +16,7 @@ public class PageMaker {
 	private int displayPageNum;
 	
 	
-	private Criteria cri;
+	private SearchCriteria cri;
 	
 	
 	
