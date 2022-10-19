@@ -16,6 +16,9 @@
      제목 :  <input type="text" name="title" value="${board.title }"></br>
      글쓴이 : <input type="text" name="writer" value="${board.writer }"></br>
      본문 :  <textarea name="content" name="content" rows="20" cols="100">${board.title }</textarea><br/>
+             <input type="hidden" name="pageNum" value="${param.pageNum }"/>
+	         <input type="hidden" name="searchType" value="${param.searchType }"/>
+	         <input type="hidden" name="keyword" value="${param.keyword }"/>
             <input type="submit" value="수정완료"><input type="reset" value="초기화"> 
     </form>       
             

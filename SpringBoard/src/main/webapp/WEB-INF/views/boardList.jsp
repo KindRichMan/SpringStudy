@@ -26,7 +26,7 @@
 	          <c:forEach var="board" items="${boardList }">
 	              <tr> 
 		             <td>${board.bno }</td>
-		             <td><a href="/boardDetail/${board.bno}?searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${board.title }</td>
+		             <td><a href="/boardDetail/${board.bno}?pageNum=${pageMaker.cri.pageNum}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${board.title }</td>
 		             <td>${board.writer }</td>
 		             <td>${board.regdate }</td>
 		             <td>${board.updatedate }</td>
@@ -40,7 +40,7 @@
 	     ${pageMaker }
 	     
 	     <!--// 페이지 네이션  -->
-	     
+	  
 	 <ul class="pagination justify-content-center" >
 		   <c:if test="${pageMaker.prev }">
 		    	<li class="page-item"><a class="page-link" href="boardList?pageNum=${pageMaker.startPage -1 }&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">Previous</a></li>

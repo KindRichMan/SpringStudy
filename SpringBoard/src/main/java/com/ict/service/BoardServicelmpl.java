@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
+import com.ict.domain.SearchCriteria;
 import com.ict.mapper.BoardMapper;
 
 @Service
@@ -16,7 +17,7 @@ public class BoardServicelmpl implements BoardService{
 	private BoardMapper boardMapper;
 
 	@Override
-	public List<BoardVO> getList(Criteria cri) {
+	public List<BoardVO> getList(SearchCriteria cri) {
 		
 		return boardMapper.getList(cri);
 	}
@@ -28,9 +29,9 @@ public class BoardServicelmpl implements BoardService{
 	}
 
 	@Override
-	public int countPageNum() {
+	public int countPageNum(SearchCriteria cri) {
 		
-		return boardMapper.countPageNum();
+		return boardMapper.countPageNum(cri);
 	}
 
 	@Override
