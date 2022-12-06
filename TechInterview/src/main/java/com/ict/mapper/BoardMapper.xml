@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http:/mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 위쪽에는 마이바티스에서 사용할 xml파일임을 명시
+아래쪽 mapper태그의 namespace에 어떤 인터페이스와 연동할지 패키지부터 다 적음 -->
+<mapper namespace="com.ict.mapper.BoardMapper">
+	
+	<select id="getList" resultType="com.ict.domain.BoardVO">
+	
+		    <![CDATA[
+		       SELECT * FROM
+	     (SELECT /*+ INDEX_DESC(board_tbl pk_board) */
+	     rownum rn, board_tbl.* FROM board_tbl WHERE 
+	        ]]>
+	        <!-- 동적 쿼리조건 -->
+	          <if test="searchType != null">
+	             <if test="searchType == 'na'.toString()">
+	               (NAME like '%'||#{keyword}||'%') AND
+	             </if>  
+	             <if test="searchType == 'addre'.toString()">
+	               (ADDRESS like '%'||#{keyword}||'%') AND
+	             </if> 
+	             <if test="searchType == 'univer'.toString()">
+	               (UNIVERSITY like '%'||#{keyword}||'%') AND
+	             </if>
+	             <if test="searchType == 'major'.toString()">
+	               (MAJOR like '%'||#{keyword}||'%') AND
+	             </if>      
+	          </if>
+	         
+	    
+	     <!-- 글번호 조절 -->
+	     <![CDATA[
+	     rownum <= #{pageEnd}) 
+	          WHERE rn > #{pageStart } 
+		       
+		       ]]>
+	
+	</select>
+	
+	
+	
+	<insert id="insert">
+	    INSERT INTO board_tbl (bno,name,address,university,major) 
+	        VALUES
+	    (board_num.nextVal, #{name},#{address},#{university},#{major})
+	
+	</insert>
+	
+	<select id="select" resultType="com.ict.domain.BoardVO">
+	
+	    SELECT * FROM board_tbl WHERE bno=#{bno}
+	</select>
+	
+	<delete id="delete">
+	     DELETE FROM board_tbl WHERE bno=#{bno} 
+	
+	</delete> 
+	
+	<update id="update">
+	  UPDATE board_tbl SET name=#{name},address=#{address},university=#{university},
+	            major=#{major},updatedate=SYSDATE 
+	                 WHERE bno=#{bno}
+	</update>
+	
+	<select id="countPageNum" resultType="int">
+	     SELECT COUNT(*) FROM board_tbl
+	</select>
+	
+</mapper>
+
+
+
+
+

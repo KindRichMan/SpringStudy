@@ -1,4 +1,4 @@
 #Tomcat publish data
-#Fri Oct 21 14:08:08 KST 2022
-org.eclipse.jst.jee.server\:SpringBoard=C\:\\apache-tomcat-9.0.62\\wtpwebapps\\SpringBoard
-org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\anghk\\.m2\\repository\\org\\springframework\\spring-web\\5.0.7.RELEASE\\spring-web-5.0.7.RELEASE.jar=C\:\\apache-tomcat-9.0.62\\wtpwebapps\\SpringBoard\\WEB-INF\\lib\\spring-web-5.0.7.RELEASE.jar
+#Tue Dec 06 18:08:40 KST 2022
+org.eclipse.jst.jee.server\:TechInterview=C\:\\apache-tomcat-9.0.62\\wtpwebapps\\TechInterview
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\anghk\\.m2\\repository\\org\\springframework\\spring-web\\5.0.7.RELEASE\\spring-web-5.0.7.RELEASE.jar=C\:\\apache-tomcat-9.0.62\\wtpwebapps\\TechInterview\\WEB-INF\\lib\\spring-web-5.0.7.RELEASE.jar
